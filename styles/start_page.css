@@ -1,0 +1,9 @@
+.start_page svg{
+  width: 10vw;
+  max-height: var(--hf_mh);
+  
+  outline: 1px solid red;
+}
+.footer .start_page {
+  justify-content: space-between;
+}
