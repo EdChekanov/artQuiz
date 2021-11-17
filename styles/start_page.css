@@ -1,9 +1,84 @@
+.start_page {
+  position: relative;
+}
 .start_page svg{
   width: 10vw;
   max-height: var(--hf_mh);
-  
-  outline: 1px solid red;
 }
+/* HEADER  */
+.parts_title {
+  display: none;
+}
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+/* MAIN  */
+.main .start_page {
+  min-height: 60vh;
+  display: flex;
+  justify-content: space-around;
+
+
+  display: none;
+}
+.artists_quiz,
+.pictures_quiz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.artist_icon,
+.picture_icon {
+  flex-grow: 1;
+  max-height: 100px;
+  max-width: 100px;
+  aspect-ratio: 1/1;
+  background-size: cover;
+}
+.artist_icon {
+  background: url(../assets/images/dali.png) no-repeat;
+}
+.picture_icon {
+  background: url(../assets/images/paint.png) no-repeat;
+}
+.settings {
+  position: absolute;
+  width: 6vw;
+  aspect-ratio: 1/1;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border: none;
+  background: url(../assets/images/settings.png) no-repeat center center;
+  background-size: cover;
+  cursor: pointer;
+}
+.artists_quiz:hover,
+.pictures_quiz:hover {
+  transform: scale(1.2);
+}
+.settings:hover {
+  transform:scale(1.2) translateX(-40%);
+}
+.artists_quiz:active,
+.pictures_quiz:active,
+.settings:active {
+  opacity: 0.7;
+}
+.start_page_title {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; 
+}
+/* FOOTER  */
 .footer .start_page {
   justify-content: space-between;
 }

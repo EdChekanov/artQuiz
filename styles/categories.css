@@ -1,0 +1,30 @@
+/* HEADER  */
+.parts_title {
+  display: inline-block;
+}
+/* MAIN  */
+.main .parts_artists,
+.main .parts_pictures {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.main .parts_artists div,
+.main .parts_pictures div {
+  flex-grow: 1;
+  max-height: 100px;
+  max-width: 100px;
+  aspect-ratio: 1/1;
+  background-size: cover;
+  background: #000;
+}
+
+
+
+.main .parts_artists {
+  /* display: none; */
+}
+.main .parts_pictures {
+  display: none;
+}
