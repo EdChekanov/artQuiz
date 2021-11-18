@@ -42,15 +42,19 @@ body {
   background: rgba(255, 255, 255, 0.7);
   min-width: 100vw;
   min-height: 100vh;
+  overflow: hidden;
 }
 /* HEADER */
 .header {
   width: 100%;
   height: var(--hf_mh);
+  position: relative;
 }
 /* MAIN */
 .main {
-  min-height: 60vh;
+  height: 60vh;
+  transition: 1s;
+  overflow: hidden;
 }
 /* FOOTER */
 .footer {

@@ -6,9 +6,6 @@
   max-height: var(--hf_mh);
 }
 /* HEADER  */
-.parts_title {
-  display: none;
-}
 .logo {
   display: flex;
   flex-direction: column;
@@ -20,9 +17,6 @@
   min-height: 60vh;
   display: flex;
   justify-content: space-around;
-
-
-  display: none;
 }
 .artists_quiz,
 .pictures_quiz {
@@ -81,4 +75,13 @@
 /* FOOTER  */
 .footer .start_page {
   justify-content: space-between;
+}
+
+
+
+.parts_title {
+  display: none;
+}
+.main .start_page {
+  /* display: none; */
 }
