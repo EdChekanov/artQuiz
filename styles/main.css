@@ -1,5 +1,6 @@
 :root {
   --hf_mh: 18vh;
+  --m_mh: 60vh;
 }
 * {
   margin: 0;
@@ -52,7 +53,7 @@ body {
 }
 /* MAIN */
 .main {
-  height: 60vh;
+  height: var(--m_mh);
   transition: 1s;
   overflow: hidden;
 }

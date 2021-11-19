@@ -1,15 +1,24 @@
 /* HEADER  */
 .header .home {
-  height: var(--hf_mh);
-  width: var(--hf_mh);
   background: url(../assets/images/home.png) center no-repeat;
-  background-size: cover;
-  cursor: pointer;
-  position: absolute;
   left: 0;
   transform: translateX(-1000%);
 }
-.home:hover {
+.header .parts {
+  background: url(../assets/images/parts.png) center no-repeat;
+  right: 0;
+  transform: translateX(1000%);
+}
+.header .home,
+.header .parts {
+  height: var(--hf_mh);
+  width: var(--hf_mh);
+  background-size: cover;
+  cursor: pointer;
+  position: absolute;
+}
+.home:hover,
+.parts:hover {
   opacity: 0.7;
 }
 

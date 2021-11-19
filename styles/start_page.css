@@ -57,7 +57,7 @@
   transform: scale(1.2);
 }
 .settings:hover {
-  transform:scale(1.2) translateX(-40%);
+  transform:scale(0.8) translateX(-60%);
 }
 .artists_quiz:active,
 .pictures_quiz:active,
@@ -83,5 +83,5 @@
   display: none;
 }
 .main .start_page {
-  /* display: none; */
+  display: none;
 }
