@@ -10,7 +10,7 @@
   outline: 1px solid red;
   width: 50vw;
   background: url(../assets/arts/0.jpg) center no-repeat;
-  background-size: cover;
+  background-size: contain;
   position: relative;
   border-radius: 2vh;
 }
@@ -89,4 +89,11 @@
   height: var(--hf_mh);
   width: var(--hf_mh);
   background-size: contain;
+}
+
+.modal_result {
+  display: none;
+}
+.game {
+  display: none;
 }
