@@ -7,7 +7,6 @@
 }
 .question_item {
   flex-grow: 3;
-  outline: 1px solid red;
   width: 50vw;
   background: url(../assets/arts/0.jpg) center no-repeat;
   background-size: contain;
@@ -26,14 +25,12 @@
 }
 .answer_items {
   flex-grow: 2;
-  outline: 1px solid red;
   width: 50vw;
   display: flex;
   flex-wrap: wrap;
 }
 .answer {
   width: 50%;
-  outline: 1px solid red;
   display: flex;
   align-items: center;
   justify-content: center;
