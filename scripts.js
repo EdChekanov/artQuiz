@@ -12,6 +12,16 @@ const home = document.querySelector('.home');
 
 const partsTitle = document.querySelector('.parts_title');
 
+const parts1 = document.querySelectorAll('.part_1');
+const parts2 = document.querySelectorAll('.part_2');
+const parts3 = document.querySelectorAll('.part_3');
+
+const artistPart1 = parts1[0];
+const artistPart2 = parts2[0];
+const artistPart3 = parts3[0];
+const picturePart1 = parts1[1];
+const picturePart2 = parts2[1];
+const picturePart3 = parts3[1];
 
 function showItemMain(item) {
   item.style.display = 'flex';
@@ -126,13 +136,49 @@ parts.forEach(el => el.addEventListener('mouseup', onPartsBtn));
 const artistsImage = document.querySelector('.question_item');
 const artistsQuestionNumber = document.querySelector('.question_number');
 const answers = document.querySelectorAll('.answer_text');
+const popupResult = document.querySelector('.modal_result');
+const overlay = popupResult.querySelector('.overlay');
+const blockResult = overlay.querySelector('.result_block');
+const trueImg = blockResult.querySelector('.result_true');
+const falseImg = blockResult.querySelector('.result_false');
+const trueText = blockResult.querySelector('.result_text_true');
+const falseText = blockResult.querySelector('.result_text_false');
+const okayBtn = blockResult.querySelector('.okay');
+let artists1 = {};
+let artists2 = {};
+let artists3 = {};
+let pictures1 = {};
+let pictures2 = {};
+let pictures3 = {};
 let round = 0;
-let step = 1;
+let step = 0;
+let target;
 
 function startArtistsGame(evt) {
-  if (evt.target.closest('.part').classList.contains('part_1')) round = 0;
-  if (evt.target.closest('.part').classList.contains('part_2')) round = 10;
-  if (evt.target.closest('.part').classList.contains('part_3')) round = 20;
+  round = 0;
+  step = 0;
+  if (evt.target.closest('.part').classList.contains('part_1')) {
+    round = 0;
+    target = artists1;
+  }
+  if (evt.target.closest('.part').classList.contains('part_2')) {
+    round = 10;
+    target = artists2;
+  }
+  if (evt.target.closest('.part').classList.contains('part_3')) {
+    round = 20;
+    target = artists3;
+  }
+  nextStep();
+}
+function getRandomNumber(min, max) {
+  let rand = min + Math.random() * (max + 1 - min);
+  return Math.floor(rand);
+}
+function nextStep() {
+  round++;
+  step++;
+
   artistsImage.style.backgroundImage = `url(../assets/arts/${round}.jpg)`;
   artistsImage.style.backgroundPosition = `center`;
   artistsImage.style.backgroundRepeat = `no-repeat`;
@@ -142,21 +188,106 @@ function startArtistsGame(evt) {
   
   answers.forEach(el => el.textContent = images[getRandomNumber(round + 1, images.length - 1)].author);
   answers.forEach(el => {
-    el.closest('.answer').addEventListener('mouseup', () => {
-      el.closest('.answer').classList.add('false');
-    })
+    el.closest('.answer').addEventListener('mouseup', onFalseAnswer);
   })
 
   let correctItem = answers[getRandomNumber(0, 3)];
   correctItem.textContent = images[round].author;
-  console.log(correctItem.closest('.answer'))
   let correctAnswer = correctItem.closest('.answer');
-  correctAnswer.addEventListener('mouseup', () => {
-    correctAnswer.classList.remove('false');
-    correctAnswer.classList.add('true');
+  correctAnswer.removeEventListener('mouseup', onFalseAnswer);
+  correctAnswer.addEventListener('mouseup', onTrueAnswer);
+}
+function showPopupResult(item) {
+  popupResult.style.display = 'block';
+  setTimeout(() => {
+    blockResult.style.transform = 'translateY(0%)';
+  }, 0);
+  if (item) {
+    trueImg.style.display = 'inline-block';
+    falseImg.style.display = 'none';
+    trueText.style.display = 'inline-block';
+    falseText.style.display = 'none';
+  } else {
+    trueImg.style.display = 'none';
+    falseImg.style.display = 'inline-block';
+    trueText.style.display = 'none';
+    falseText.style.display = 'inline-block';
+  }
+  overlay.addEventListener('mouseup', onOverlay);
+  okayBtn.addEventListener('mouseup', onOkayBtn);
+}
+function onOverlay(evt) {
+  if (evt.target === overlay) closePopup();
+}
+function onOkayBtn() {
+  closePopup();
+}
+function closePopup() {
+  popupResult.style.display = 'none';
+  answers.forEach(el => {
+    el.closest('.answer').removeEventListener('mouseup', onFalseAnswer);
+    el.closest('.answer').removeEventListener('mouseup', onTrueAnswer);
+    el.closest('.answer').classList.remove('false');
+    el.closest('.answer').classList.remove('true');
   })
+  overlay.removeEventListener('mouseup', onOverlay);
+  okayBtn.removeEventListener('mouseup', onOkayBtn);
+  let trueCount = 0;
+  for (let el in target) {
+    if (target[el]) trueCount++;    
+  }
+  if (target == artists1) {
+    artistPart1.querySelector('.score').textContent = `${trueCount}/10`;
+    localStorage.setItem('art1', trueCount);
+  }
+  if (target == artists2) {
+    artistPart2.querySelector('.score').textContent = `${trueCount}/10`;
+    localStorage.setItem('art2', trueCount);
+  }
+  if (target == artists3) {
+    artistPart3.querySelector('.score').textContent = `${trueCount}/10`;
+    localStorage.setItem('art3', trueCount);
+  }
+  if (target == pictures1) {
+    picturePart1.querySelector('.score').textContent = `${trueCount}/10`;
+    localStorage.setItem('pic1', trueCount);
+  }
+  if (target == pictures2) {
+    picturePart2.querySelector('.score').textContent = `${trueCount}/10`;
+    localStorage.setItem('pic2', trueCount);
+  }
+  if (target == pictures3) {
+    picturePart3.querySelector('.score').textContent = `${trueCount}/10`;
+    localStorage.setItem('pic3', trueCount);
+  }
+  if (step === 10) {
+    onParts();
+    return;
+  }
+  nextStep();
 }
-function getRandomNumber(min, max) {
-  let rand = min + Math.random() * (max + 1 - min);
-  return Math.floor(rand);
+function onFalseAnswer() {
+  this.classList.add('false');
+  showPopupResult(0);
+  target[step] = false;
 }
+function onTrueAnswer() {
+  this.classList.remove('false');
+  this.classList.add('true');
+  showPopupResult(1);
+  target[step] = true;
+}
+
+artistPart1.querySelector('.score').textContent = `${localStorage.getItem('art1') || 0}/10`;
+if (localStorage.getItem('art1') == 10) artistPart1.querySelector('.mask_color').style.background = 'rgba(255, 255, 255, 0)';  
+artistPart2.querySelector('.score').textContent = `${localStorage.getItem('art2') || 0}/10`;
+if (localStorage.getItem('art2') == 10) artistPart2.querySelector('.mask_color').style.background = 'rgba(255, 255, 255, 0)';  
+artistPart3.querySelector('.score').textContent = `${localStorage.getItem('art3') || 0}/10`;
+if (localStorage.getItem('art3') == 10) artistPart3.querySelector('.mask_color').style.background = 'rgba(255, 255, 255, 0)';  
+picturePart1.querySelector('.score').textContent = `${localStorage.getItem('pic1') || 0}/10`;
+if (localStorage.getItem('pic1') == 10) picturePart1.querySelector('.mask_color').style.background = 'rgba(255, 255, 255, 0)';  
+picturePart2.querySelector('.score').textContent = `${localStorage.getItem('pic2') || 0}/10`;
+if (localStorage.getItem('pic2') == 10) picturePart2.querySelector('.mask_color').style.background = 'rgba(255, 255, 255, 0)';  
+picturePart3.querySelector('.score').textContent = `${localStorage.getItem('pic3') || 0}/10`;
+if (localStorage.getItem('pic3') == 10) picturePart3.querySelector('.mask_color').style.background = 'rgba(255, 255, 255, 0)';  
+

@@ -38,6 +38,7 @@ body {
   background-position: top left;
   background-repeat: no-repeat;
   background-size: cover;
+  overflow: hidden;
 }
 .body {
   background: rgba(255, 255, 255, 0.7);
