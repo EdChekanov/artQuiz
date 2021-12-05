@@ -179,7 +179,7 @@ function nextStep() {
   round++;
   step++;
 
-  artistsImage.style.backgroundImage = `url(../assets/arts/${round}.jpg)`;
+  artistsImage.style.backgroundImage = `url(./assets/arts/${round}.jpg)`;
   artistsImage.style.backgroundPosition = `center`;
   artistsImage.style.backgroundRepeat = `no-repeat`;
   artistsImage.style.backgroundSize = `contain`;
